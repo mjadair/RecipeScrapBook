@@ -28,6 +28,7 @@
 		E7A4BBD424C85D86005347BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E7A4BBDA24C86140005347BC /* SingleRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRecipeViewController.swift; sourceTree = "<group>"; };
 		E7A4BBDE24C8619D005347BC /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
+		E7A4BBE024C8621A005347BC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +69,7 @@
 				E7A4BBCF24C85D86005347BC /* Assets.xcassets */,
 				E7A4BBD124C85D86005347BC /* LaunchScreen.storyboard */,
 				E7A4BBD424C85D86005347BC /* Info.plist */,
+				E7A4BBE024C8621A005347BC /* README.md */,
 			);
 			path = RecipeScrapBook;
 			sourceTree = "<group>";
