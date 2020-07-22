@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Collection View Controller-->
+        <!--RecipeCollectionViewController-->
         <scene sceneID="24C-Oy-ZG7">
             <objects>
-                <collectionViewController id="diZ-XD-6Ou" sceneMemberID="viewController">
+                <collectionViewController title="RecipeCollectionViewController" id="diZ-XD-6Ou" customClass="RecipeCollectionViewController" customModule="RecipeScrapBook" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="KcL-t0-0pQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -23,23 +23,38 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RecipeCell" id="5c9-Tg-80i">
-                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="5c9-Tg-80i" customClass="RecipeCollectionViewCell" customModule="RecipeScrapBook" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="108.66666666666666" height="113.33333333333333"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5Iw-dQ-M8k">
-                                    <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5Iw-dQ-M8k" customClass="RecipeCollectionViewCell" customModule="RecipeScrapBook" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="108.66666666666666" height="113.33333333333333"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPf-gH-oL5">
+                                            <rect key="frame" x="23.999999999999996" y="40" width="41.666666666666657" height="20.333333333333329"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="bPf-gH-oL5" secondAttribute="bottom" constant="53" id="TW2-Xr-czg"/>
+                                        <constraint firstItem="bPf-gH-oL5" firstAttribute="leading" secondItem="5Iw-dQ-M8k" secondAttribute="leading" constant="24" id="Yti-UZ-8bx"/>
+                                        <constraint firstAttribute="trailing" secondItem="bPf-gH-oL5" secondAttribute="trailing" constant="43" id="dc8-Oi-dE5"/>
+                                        <constraint firstItem="bPf-gH-oL5" firstAttribute="top" secondItem="5Iw-dQ-M8k" secondAttribute="top" constant="40" id="lOO-3E-Zbc"/>
+                                    </constraints>
                                 </collectionViewCellContentView>
                                 <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
+                                    <outlet property="recipeLabel" destination="bPf-gH-oL5" id="P5H-li-XyQ"/>
                                     <segue destination="91T-oi-Keu" kind="show" id="SNI-aN-hK9"/>
                                 </connections>
                             </collectionViewCell>
                         </cells>
                         <connections>
                             <outlet property="dataSource" destination="diZ-XD-6Ou" id="ieq-H7-w4H"/>
-                            <outlet property="delegate" destination="diZ-XD-6Ou" id="Hcc-Tj-Lka"/>
+                            <outlet property="delegate" destination="diZ-XD-6Ou" id="Jko-Kf-zUI"/>
                         </connections>
                     </collectionView>
                     <navigationItem key="navigationItem" id="iev-gr-fzn">
@@ -50,7 +65,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhX-Bl-05n" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1352.1739130434785" y="133.25892857142856"/>
+            <point key="canvasLocation" x="1351.2" y="133.00492610837438"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="Szh-38-0s2">
