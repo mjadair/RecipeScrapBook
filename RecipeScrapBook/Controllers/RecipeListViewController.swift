@@ -8,11 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class RecipeViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
+    
+    
+    // viewWillAppear is called when the UITableView is about to be brought into focus
+    // We call the above reload function when this happens
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+//        reload()
     }
 
 
