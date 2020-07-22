@@ -47,6 +47,7 @@
 			children = (
 				E7A4BBC524C85D80005347BC /* RecipeScrapBook */,
 				E7A4BBC424C85D80005347BC /* Products */,
+				E7A4BBE024C8621A005347BC /* README.md */,
 			);
 			sourceTree = "<group>";
 		};
@@ -69,7 +70,6 @@
 				E7A4BBCF24C85D86005347BC /* Assets.xcassets */,
 				E7A4BBD124C85D86005347BC /* LaunchScreen.storyboard */,
 				E7A4BBD424C85D86005347BC /* Info.plist */,
-				E7A4BBE024C8621A005347BC /* README.md */,
 			);
 			path = RecipeScrapBook;
 			sourceTree = "<group>";
