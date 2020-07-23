@@ -56,6 +56,9 @@ class RecipeCollectionViewController: UICollectionViewController {
                 reuseIdentifier, for: indexPath) as! RecipeCollectionViewCell
 
         cell.recipeLabel.text = "Recipe!"
+        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderWidth = 1
+        cell.layer.cornerRadius = 8
 
         return cell
     }
