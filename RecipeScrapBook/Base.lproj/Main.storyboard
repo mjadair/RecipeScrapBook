@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="4" id="0Kg-u9-wia">
-                            <size key="itemSize" width="121" height="111"/>
+                            <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="15"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
                             <inset key="sectionInset" minX="2" minY="0.0" maxX="2" maxY="0.0"/>
@@ -32,6 +32,11 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPf-gH-oL5">
                                             <rect key="frame" x="24" y="40" width="54" height="18"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="18" id="8yB-er-Hpj"/>
+                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="250" constant="41" id="LqM-IN-VtE"/>
+                                                <constraint firstAttribute="width" secondItem="bPf-gH-oL5" secondAttribute="height" multiplier="3:1" id="qkP-L6-asQ"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -39,7 +44,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottom" secondItem="bPf-gH-oL5" secondAttribute="bottom" constant="53" id="TW2-Xr-czg"/>
-                                        <constraint firstItem="bPf-gH-oL5" firstAttribute="leading" secondItem="5Iw-dQ-M8k" secondAttribute="leading" constant="24" id="Yti-UZ-8bx"/>
+                                        <constraint firstItem="bPf-gH-oL5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5Iw-dQ-M8k" secondAttribute="leading" constant="24" id="Yti-UZ-8bx"/>
                                         <constraint firstAttribute="trailing" secondItem="bPf-gH-oL5" secondAttribute="trailing" constant="43" id="dc8-Oi-dE5"/>
                                         <constraint firstItem="bPf-gH-oL5" firstAttribute="top" secondItem="5Iw-dQ-M8k" secondAttribute="top" constant="40" id="lOO-3E-Zbc"/>
                                     </constraints>
@@ -53,7 +58,7 @@
                                 </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="V4B-SB-pVe">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="header" id="V4B-SB-pVe">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </collectionReusableView>
