@@ -60,6 +60,9 @@
                     <navigationItem key="navigationItem" id="iev-gr-fzn">
                         <barButtonItem key="rightBarButtonItem" style="plain" systemItem="add" id="bd6-eL-BC9">
                             <color key="tintColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <connections>
+                                <action selector="createNote" destination="diZ-XD-6Ou" id="4eg-0E-Dsg"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </collectionViewController>
