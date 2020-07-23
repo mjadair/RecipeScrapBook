@@ -24,15 +24,15 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="5c9-Tg-80i" customClass="RecipeCollectionViewCell" customModule="RecipeScrapBook" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="108.66666666666666" height="113.33333333333333"/>
+                                <rect key="frame" x="0.0" y="0.0" width="93.333333333333314" height="105"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5Iw-dQ-M8k" customClass="RecipeCollectionViewCell" customModule="RecipeScrapBook" customModuleProvider="target">
-                                    <rect key="frame" x="0.0" y="0.0" width="108.66666666666666" height="113.33333333333333"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="93.333333333333314" height="105"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPf-gH-oL5">
-                                            <rect key="frame" x="23.999999999999996" y="40" width="41.666666666666657" height="20.333333333333329"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="24" y="40" width="26.333333333333329" height="12"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
