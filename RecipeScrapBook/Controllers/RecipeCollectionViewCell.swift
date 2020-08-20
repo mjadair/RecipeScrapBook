@@ -14,6 +14,17 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     
     
+    func toggleSelected ()
+    {
+        if (isSelected){
+            print("cell is saying it is selected!")
+        }else {
+            print("cell is saying it is NOT selected!")
+        }
+    }
+    
+    
+    
 
     
 }

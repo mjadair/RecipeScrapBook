@@ -16,7 +16,7 @@
 		E7A4BBDB24C86140005347BC /* SingleRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4BBDA24C86140005347BC /* SingleRecipeViewController.swift */; };
 		E7A4BBDF24C8619D005347BC /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4BBDE24C8619D005347BC /* Recipe.swift */; };
 		E7A4BBE624C88CBD005347BC /* RecipeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4BBE524C88CBD005347BC /* RecipeCollectionViewController.swift */; };
-		E7A4BBEA24C89F38005347BC /* CollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4BBE924C89F38005347BC /* CollectionViewCell.swift */; };
+		E7A4BBEA24C89F38005347BC /* RecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4BBE924C89F38005347BC /* RecipeCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,7 +32,7 @@
 		E7A4BBDE24C8619D005347BC /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		E7A4BBE024C8621A005347BC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E7A4BBE524C88CBD005347BC /* RecipeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewController.swift; sourceTree = "<group>"; };
-		E7A4BBE924C89F38005347BC /* CollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CollectionViewCell.swift; sourceTree = "<group>"; };
+		E7A4BBE924C89F38005347BC /* RecipeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,7 +89,7 @@
 		E7A4BBDC24C86157005347BC /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				E7A4BBE924C89F38005347BC /* CollectionViewCell.swift */,
+				E7A4BBE924C89F38005347BC /* RecipeCollectionViewCell.swift */,
 				E7A4BBE524C88CBD005347BC /* RecipeCollectionViewController.swift */,
 				E7A4BBDA24C86140005347BC /* SingleRecipeViewController.swift */,
 			);
@@ -178,7 +178,7 @@
 			files = (
 				E7A4BBE624C88CBD005347BC /* RecipeCollectionViewController.swift in Sources */,
 				E7A4BBDB24C86140005347BC /* SingleRecipeViewController.swift in Sources */,
-				E7A4BBEA24C89F38005347BC /* CollectionViewCell.swift in Sources */,
+				E7A4BBEA24C89F38005347BC /* RecipeCollectionViewCell.swift in Sources */,
 				E709B3E124EEBCBA00CE29DE /* DataModel.xcdatamodeld in Sources */,
 				E7A4BBC724C85D80005347BC /* AppDelegate.swift in Sources */,
 				E7A4BBC924C85D80005347BC /* SceneDelegate.swift in Sources */,

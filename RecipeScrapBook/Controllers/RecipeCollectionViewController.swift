@@ -22,6 +22,11 @@ class RecipeCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.allowsMultipleSelection = true;
+        collectionView.allowsSelection = true
+        
         loadRecipes()
     }
     
@@ -39,31 +44,20 @@ class RecipeCollectionViewController: UICollectionViewController {
             
             self.recipes.append(newRecipe)
             self.saveRecipes()
-            
         }
         
         alert.addAction(action)
-        
         alert.addTextField { (field) in
             textField = field
             textField.placeholder = "Add a new category"
         }
-        
         present(alert, animated: true, completion: nil)
     }
     
-    
-    // Reloads the view, by getting all the notes from the database and reloading the view
-    func reload() {
-
-    }
-
-
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.recipes.count
@@ -84,13 +78,44 @@ class RecipeCollectionViewController: UICollectionViewController {
     }
     
     
+    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
+        print("HELLO!")
+        return true
+    }
+    
+
+    
+    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        let cell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
+        
+        
+        print(cell)
+        if cell.isSelected {
+            cell.toggleSelected()
+            print("Who?")
+            collectionView.selectItem(at: nil, animated: true, scrollPosition: [])
+            return false
+        }
+        cell.toggleSelected()
+        print("selected!")
+        return true
+    }
+    
+    
+ 
+
+    
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // handle tap events
+          print("\ndidSelectItemAt: \(indexPath.row)")
         print("You selected cell #\(indexPath.item)!")
         print("HELLO!")
+
+        let cell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
+        cell.toggleSelected()
+         print(cell)
         
-        reload()
+    
         
 }
 
