@@ -12,9 +12,6 @@ private let reuseIdentifier = "cell"
 
 class RecipeCollectionViewController: UICollectionViewController {
     
-    
-    
-    
     var recipes: [Recipe] = []
     
     
@@ -22,10 +19,7 @@ class RecipeCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         reload()
-        
-
     }
     
     
@@ -72,43 +66,32 @@ class RecipeCollectionViewController: UICollectionViewController {
        override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
             // handle tap events
             print("You selected cell #\(indexPath.item)!")
-        }
+        
+        print("HELLO!")
+        
+//        RecipeManager.shared.deleteRecipe(id: Int32(indexPath.item))
+        reload()
+        
+}
 
-    // MARK: UICollectionViewDelegate
-
-    /*
-    // Uncomment this method to specify if the specified item should be highlighted during tracking
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    /*
-    // Uncomment this method to specify if the specified item should be selected
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    */
-
-    
-//     Uncomment these methods to specify if an action menu should be displayed for the specified item, and react to actions performed on the item
-    override func collectionView(_ collectionView: UICollectionView, shouldShowMenuForItemAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, canPerformAction action: Selector, forItemAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return true
-    }
-
-     func collectionView(_ collectionView: UICollectionView, performAction action: UILongPressGestureRecognizer, forItemAt indexPath: IndexPath, withSender sender: Any?) {
-        print("What?")
-    
-    }
-    
-    
 
 
 }
+        
+
+
+
+    // Uncomment this method to specify if the specified item should be selected
+func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+ 
+    
+
+
+    
+
+
 
 
 
@@ -119,11 +102,5 @@ class RecipeCollectionViewController: UICollectionViewController {
     
     
     
-    
-//    
-//    // MARK: - UICollectionViewDelegate protocol
-//    
-
-//}
 
 

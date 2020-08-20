@@ -44,6 +44,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E709B3DE24EEB44400CE29DE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E7A4BBCC24C85D80005347BC /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		E7A4BBBA24C85D7F005347BC = {
 			isa = PBXGroup;
 			children = (
@@ -64,11 +72,11 @@
 		E7A4BBC524C85D80005347BC /* RecipeScrapBook */ = {
 			isa = PBXGroup;
 			children = (
-				E7A4BBDD24C86188005347BC /* Models */,
-				E7A4BBDC24C86157005347BC /* Controllers */,
 				E7A4BBC624C85D80005347BC /* AppDelegate.swift */,
 				E7A4BBC824C85D80005347BC /* SceneDelegate.swift */,
-				E7A4BBCC24C85D80005347BC /* Main.storyboard */,
+				E7A4BBDD24C86188005347BC /* Models */,
+				E7A4BBDC24C86157005347BC /* Controllers */,
+				E709B3DE24EEB44400CE29DE /* Views */,
 				E7A4BBCF24C85D86005347BC /* Assets.xcassets */,
 				E7A4BBD124C85D86005347BC /* LaunchScreen.storyboard */,
 				E7A4BBD424C85D86005347BC /* Info.plist */,

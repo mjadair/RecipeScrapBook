@@ -18,12 +18,10 @@ struct Recipe {
 
 class RecipeManager {
     
-    
     var database: OpaquePointer?
-    
     static let shared = RecipeManager()
-    
     private init() {
+        
     }
     
     
@@ -109,6 +107,29 @@ class RecipeManager {
         
         sqlite3_finalize(statement)
         return result
+    }
+    
+    
+    
+    
+    func deleteRecipe(id: Int32) -> Bool {
+        connect()
+        
+        var statement: OpaquePointer!
+        if sqlite3_prepare_v2(database, "DELETE FROM recipes WHERE rowid = ?", -1, &statement, nil) != SQLITE_OK {
+            print("error while preparing sql statement")
+            return false
+        }
+        
+        sqlite3_bind_int(statement, 1, id)
+        
+        if sqlite3_step(statement) != SQLITE_DONE {
+            print("error while trying to delete the recipe")
+            return false
+        }
+        
+        sqlite3_finalize(statement)
+        return true
     }
     
     
