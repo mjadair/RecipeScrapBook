@@ -12,19 +12,6 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         
     @IBOutlet weak var recipeLabel: UILabel!
     
-    
-    
-    func toggleSelected ()
-    {
-        if (isSelected){
-            print("cell is saying it is selected!")
-        }else {
-            print("cell is saying it is NOT selected!")
-        }
-    }
-    
-    
-    
 
     
 }

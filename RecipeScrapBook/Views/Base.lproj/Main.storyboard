@@ -12,7 +12,7 @@
         <scene sceneID="24C-Oy-ZG7">
             <objects>
                 <collectionViewController title="RecipeCollectionViewController" id="diZ-XD-6Ou" customClass="RecipeCollectionViewController" customModule="RecipeScrapBook" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" dataMode="prototypes" id="KcL-t0-0pQ">
+                    <collectionView key="view" clipsSubviews="YES" contentMode="scaleToFill" semanticContentAttribute="forceLeftToRight" dataMode="prototypes" id="KcL-t0-0pQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemFillColor" red="0.47058823529999999" green="0.47058823529999999" blue="0.50196078430000002" alpha="0.20000000000000001" colorSpace="custom" customColorSpace="sRGB"/>
@@ -23,42 +23,16 @@
                             <inset key="sectionInset" minX="2" minY="0.0" maxX="2" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="5c9-Tg-80i" customClass="RecipeCollectionViewCell" customModule="RecipeScrapBook" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="cell" id="1Fl-zZ-aPG" customClass="RecipeCollectionViewCell" customModule="RecipeScrapBook" customModuleProvider="target">
                                 <rect key="frame" x="2" y="15" width="182" height="167"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="5Iw-dQ-M8k" customClass="RecipeCollectionViewCell" customModule="RecipeScrapBook" customModuleProvider="target">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Ohs-2Y-LeH">
                                     <rect key="frame" x="0.0" y="0.0" width="182" height="167"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPf-gH-oL5">
-                                            <rect key="frame" x="24" y="40" width="115" height="74"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="18" id="8yB-er-Hpj"/>
-                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="250" constant="41" id="LqM-IN-VtE"/>
-                                                <constraint firstAttribute="width" secondItem="bPf-gH-oL5" secondAttribute="height" multiplier="3:1" id="qkP-L6-asQ"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                            <nil key="textColor"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                    <constraints>
-                                        <constraint firstAttribute="bottom" secondItem="bPf-gH-oL5" secondAttribute="bottom" constant="53" id="TW2-Xr-czg"/>
-                                        <constraint firstItem="bPf-gH-oL5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="5Iw-dQ-M8k" secondAttribute="leading" constant="24" id="Yti-UZ-8bx"/>
-                                        <constraint firstAttribute="trailing" secondItem="bPf-gH-oL5" secondAttribute="trailing" constant="43" id="dc8-Oi-dE5"/>
-                                        <constraint firstItem="bPf-gH-oL5" firstAttribute="top" secondItem="5Iw-dQ-M8k" secondAttribute="top" constant="40" id="lOO-3E-Zbc"/>
-                                    </constraints>
                                 </collectionViewCellContentView>
-                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <size key="customSize" width="182" height="167"/>
-                                <connections>
-                                    <outlet property="recipeLabel" destination="bPf-gH-oL5" id="GeZ-wO-apv"/>
-                                    <segue destination="91T-oi-Keu" kind="show" id="SNI-aN-hK9"/>
-                                </connections>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="header" id="V4B-SB-pVe">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="header" id="V4B-SB-pVe" customClass="RecipeCollectionViewCell" customModule="RecipeScrapBook" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </collectionReusableView>

@@ -2,7 +2,7 @@
 //  CollectionViewController.swift
 //  RecipeScrapBook
 //
-//  Created by Michael Adair on 22/07/2020.
+//  Created by Michael Adair on 21/08/2020.
 //  Copyright © 2020 Michael Adair. All rights reserved.
 //
 
@@ -69,42 +69,19 @@ class RecipeCollectionViewController: UICollectionViewController {
            collectionView.dequeueReusableCell(withReuseIdentifier:
                 reuseIdentifier, for: indexPath) as! RecipeCollectionViewCell
 
-        cell.recipeLabel.text = recipes[indexPath.item].name
+//        cell.recipeLabel.text = recipes[indexPath.item].name
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 8
+        cell.isSelected = false
 
         return cell
     }
     
-    
-    override func collectionView(_ collectionView: UICollectionView, shouldHighlightItemAt indexPath: IndexPath) -> Bool {
-        print("HELLO!")
-        return true
-    }
-    
+
 
     
-    override func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
-        let cell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
         
-        
-        print(cell)
-        if cell.isSelected {
-            cell.toggleSelected()
-            print("Who?")
-            collectionView.selectItem(at: nil, animated: true, scrollPosition: [])
-            return false
-        }
-        cell.toggleSelected()
-        print("selected!")
-        return true
-    }
-    
-    
- 
-
-    
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
           print("\ndidSelectItemAt: \(indexPath.row)")
@@ -112,15 +89,11 @@ class RecipeCollectionViewController: UICollectionViewController {
         print("HELLO!")
 
         let cell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
-        cell.toggleSelected()
          print(cell)
         
-    
-        
 }
-
-
     
+
     //MARK: This it the function that loads our recipes
     
     func loadRecipes() {
@@ -134,6 +107,8 @@ class RecipeCollectionViewController: UICollectionViewController {
         
         collectionView.reloadData()
     }
+    
+    
     
     
     func saveRecipes() {
@@ -153,25 +128,4 @@ class RecipeCollectionViewController: UICollectionViewController {
     
 
 }
-        
-
-
-
-    
-
-
-    
-
-
-
-
-
-
-    
-  
-
-    
-    
-    
-
 
