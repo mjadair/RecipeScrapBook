@@ -9,33 +9,27 @@
 import UIKit
 import CoreData
 
-private let reuseIdentifier = "cell"
+private let recipeCell = "Recipe Cell"
 
 class RecipeCollectionViewController: UICollectionViewController {
     
     var recipes = [Recipe]()
+    var selectedRecipe = Recipe()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
     
-
+    //MARK: VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.allowsMultipleSelection = true;
-        collectionView.allowsSelection = true
-        
         loadRecipes()
     }
     
     
-    
+    //MARK: + BUTTON PRESSED
     @IBAction func addButtonPressed() {
         
         var textField = UITextField()
-        
         let alert = UIAlertController(title: "Add a new recipe", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             
@@ -54,53 +48,65 @@ class RecipeCollectionViewController: UICollectionViewController {
         present(alert, animated: true, completion: nil)
     }
     
-
+    
+    //MARK: SECTION COUNT
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
-
+    
+    //MARK: CELL COUNT
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.recipes.count
     }
-
+    
+    
+    //MARK: CUSTOMISES CELL APPEARANCE
     override func collectionView(_ collectionView: UICollectionView,
-      cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+                                 cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell =
-           collectionView.dequeueReusableCell(withReuseIdentifier:
-                reuseIdentifier, for: indexPath) as! RecipeCollectionViewCell
-
-//        cell.recipeLabel.text = recipes[indexPath.item].name
+            collectionView.dequeueReusableCell(withReuseIdentifier:
+                recipeCell, for: indexPath) as! RecipeCollectionViewCell
+        
+        //        cell.recipeLabel.text = recipes[indexPath.item].name
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 8
-        cell.isSelected = false
-
+        
         return cell
     }
     
-
-
     
-        
     
+    
+     //MARK: USER SELECTION
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-          print("\ndidSelectItemAt: \(indexPath.row)")
-        print("You selected cell #\(indexPath.item)!")
-        print("HELLO!")
-
-        let cell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
-         print(cell)
+        print("\ndidSelectItemAt: \(indexPath.row)")
         
-}
+        selectedRecipe = recipes[indexPath.row]
+        performSegue(withIdentifier: "ShowSingleRecipe", sender: self)
     
+        
+    }
 
-    //MARK: This it the function that loads our recipes
+     
+     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     
+         if segue.identifier == "ShowSingleRecipe" {
+             if let destVC = segue.destination as? SingleRecipeViewController {
+                 destVC.recipe = selectedRecipe
+             }
+         }
+        
+    }
     
+    
+    //MARK: LOAD RECIPES
     func loadRecipes() {
         let request: NSFetchRequest<Recipe> = Recipe.fetchRequest()
         
         do {
-             recipes = try context.fetch(request)
+            recipes = try context.fetch(request)
         } catch {
             print("Errors loading \(error)")
         }
@@ -109,8 +115,7 @@ class RecipeCollectionViewController: UICollectionViewController {
     }
     
     
-    
-    
+    //MARK: SAVE RECIPES
     func saveRecipes() {
         
         do {
@@ -122,10 +127,10 @@ class RecipeCollectionViewController: UICollectionViewController {
         collectionView.reloadData()
         
     }
-
     
     
     
-
+    
+    
 }
 
