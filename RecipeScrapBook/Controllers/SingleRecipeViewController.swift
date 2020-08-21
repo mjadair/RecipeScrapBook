@@ -36,9 +36,12 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(SingleRecipeViewController.imageTapped(gesture:)))
         // add it to the image view;
         recipeImage.addGestureRecognizer(tapGesture)
-      
         
-        self.title = recipe.name ?? "Recipe"
+        if (recipe.image != nil) {
+            recipeImage.image = fixOrientation(img: UIImage(data: recipe.image!)!)
+        }
+    
+    self.title = recipe.name ?? "Recipe"
 
         // Do any additional setup after loading the view.
     }
@@ -51,6 +54,26 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
               //Here you can initiate your new ViewController
           }
       }
+
+    
+    func fixOrientation(img: UIImage) -> UIImage {
+        if (img.imageOrientation == .up) {
+            return img
+        }
+            
+        UIGraphicsBeginImageContextWithOptions(img.size, false, img.scale)
+        let rect = CGRect(x: 0, y: 0, width: img.size.width, height: img.size.height)
+        img.draw(in: rect)
+            
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+            
+       return normalizedImage
+    }
+
+    
+    
+  
     
   
 }
