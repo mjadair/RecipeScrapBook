@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class SingleRecipeViewController: UIViewController {
+class SingleRecipeViewController: UIViewController, UINavigationControllerDelegate {
     
     @IBOutlet weak var recipeImage: UIImageView!
     
@@ -52,9 +52,70 @@ class SingleRecipeViewController: UIViewController {
           }
       }
     
+  
+}
+
+
+
+    extension SingleRecipeViewController: UIImagePickerControllerDelegate {
+        
+        @IBAction func choosePhoto() {
+            // if the user photo library is available
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                // use the controller
+                let picker = UIImagePickerController()
+                // assign values to keys
+                picker.delegate = self
+                picker.sourceType = .photoLibrary
+                
+                // assign the controller to present the image selected, with the additional keys added above
+                navigationController?.present(picker, animated: true, completion: nil)
+            }
+            
+        }
+        
+        
+        
+        // This function displays the image selected from the photo library in our main view.
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            navigationController?.dismiss(animated: true, completion: nil)
+            if let image = info[UIImagePickerController.InfoKey.originalImage]
+                as? UIImage {
+                recipeImage.image = image
+                recipe.image = image.toData
+                
+                saveRecipe()
+            }
+        }
+        
+        
+        
+        //MARK: SAVE RECIPES
+         func saveRecipe() {
+             
+             do {
+                 try context.save()
+             } catch {
+                 print("Errors \(error)")
+             }
+             
+         }
+        
+        
+        
+        
+    }
     
 
-
-
-
+extension UIImage {
+    
+    var toData: Data? {
+        return pngData()
+    }
+    
+    
 }
+    
+    
+    
+

@@ -10,6 +10,7 @@
 		E709B3E124EEBCBA00CE29DE /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E709B3DF24EEBCBA00CE29DE /* DataModel.xcdatamodeld */; };
 		E709B3E324EFC78700CE29DE /* RecipeCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E709B3E224EFC78700CE29DE /* RecipeCollectionViewController.swift */; };
 		E709B3E724F0109400CE29DE /* SingleRecipeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E709B3E624F0109400CE29DE /* SingleRecipeViewController.swift */; };
+		E709B3E924F024DE00CE29DE /* ImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E709B3E824F024DE00CE29DE /* ImageExtension.swift */; };
 		E7A4BBC724C85D80005347BC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4BBC624C85D80005347BC /* AppDelegate.swift */; };
 		E7A4BBC924C85D80005347BC /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4BBC824C85D80005347BC /* SceneDelegate.swift */; };
 		E7A4BBCE24C85D80005347BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7A4BBCC24C85D80005347BC /* Main.storyboard */; };
@@ -23,6 +24,7 @@
 		E709B3E024EEBCBA00CE29DE /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		E709B3E224EFC78700CE29DE /* RecipeCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewController.swift; sourceTree = "<group>"; };
 		E709B3E624F0109400CE29DE /* SingleRecipeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleRecipeViewController.swift; sourceTree = "<group>"; };
+		E709B3E824F024DE00CE29DE /* ImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageExtension.swift; sourceTree = "<group>"; };
 		E7A4BBC324C85D80005347BC /* RecipeScrapBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecipeScrapBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7A4BBC624C85D80005347BC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E7A4BBC824C85D80005347BC /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +56,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		E709B3EA24F024E900CE29DE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				E709B3E824F024DE00CE29DE /* ImageExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		E7A4BBBA24C85D7F005347BC = {
 			isa = PBXGroup;
 			children = (
@@ -80,6 +90,7 @@
 				E7A4BBDC24C86157005347BC /* Controllers */,
 				E709B3DE24EEB44400CE29DE /* Views */,
 				E7A4BBCF24C85D86005347BC /* Assets.xcassets */,
+				E709B3EA24F024E900CE29DE /* Extensions */,
 				E7A4BBD124C85D86005347BC /* LaunchScreen.storyboard */,
 				E7A4BBD424C85D86005347BC /* Info.plist */,
 			);
@@ -183,6 +194,7 @@
 				E7A4BBC924C85D80005347BC /* SceneDelegate.swift in Sources */,
 				E709B3E724F0109400CE29DE /* SingleRecipeViewController.swift in Sources */,
 				E7A4BBDF24C8619D005347BC /* Recipe.swift in Sources */,
+				E709B3E924F024DE00CE29DE /* ImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
