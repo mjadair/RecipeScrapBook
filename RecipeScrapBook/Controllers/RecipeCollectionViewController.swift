@@ -28,14 +28,12 @@ class RecipeCollectionViewController: UICollectionViewController {
     
     //MARK: + BUTTON PRESSED
     @IBAction func addButtonPressed() {
-        
         var textField = UITextField()
         let alert = UIAlertController(title: "Add a new recipe", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add", style: .default) { (action) in
             
             let newRecipe = Recipe(context: self.context)
             newRecipe.name = textField.text!
-            
             self.recipes.append(newRecipe)
             self.saveRecipes()
         }
@@ -67,22 +65,26 @@ class RecipeCollectionViewController: UICollectionViewController {
             collectionView.dequeueReusableCell(withReuseIdentifier:
                 recipeCell, for: indexPath) as! RecipeCollectionViewCell
         
-        //        cell.recipeLabel.text = recipes[indexPath.item].name
+//        cell.recipeLabel.text = recipes[indexPath.item].name
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 8
         
+        if (recipes[indexPath.item].image != nil) {
+            cell.backgroundView = UIImageView(image: UIImage(data: recipes[indexPath.item].image!))
+        }
+        
         return cell
     }
-    
-    
-    
     
      //MARK: USER SELECTION
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print("\ndidSelectItemAt: \(indexPath.row)")
         
         selectedRecipe = recipes[indexPath.row]
+        
+//        print(selectedRecipe)
+        
         performSegue(withIdentifier: "ShowSingleRecipe", sender: self)
     
         
