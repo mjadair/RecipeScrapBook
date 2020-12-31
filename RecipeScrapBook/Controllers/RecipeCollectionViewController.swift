@@ -13,16 +13,20 @@ private let recipeCell = "Recipe Cell"
 
 class RecipeCollectionViewController: UICollectionViewController {
     
+    @IBOutlet weak var deleteButton: UIBarButtonItem!
+    
     var recipes = [Recipe]()
     var selectedRecipe = Recipe()
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
+  
     
     //MARK: VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         loadRecipes()
+        navigationItem.leftBarButtonItem = editButtonItem
     }
     
     
@@ -69,6 +73,8 @@ class RecipeCollectionViewController: UICollectionViewController {
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 8
+        cell.isInEditingMode = isEditing
+
         
         if (recipes[indexPath.item].image != nil) {
             cell.backgroundView = UIImageView(image: UIImage(data: recipes[indexPath.item].image!))
@@ -79,15 +85,27 @@ class RecipeCollectionViewController: UICollectionViewController {
     
      //MARK: USER SELECTION
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("\ndidSelectItemAt: \(indexPath.row)")
         
         selectedRecipe = recipes[indexPath.row]
         
-//        print(selectedRecipe)
+        if !isEditing {
+            deleteButton.isEnabled = false
+            performSegue(withIdentifier: "ShowSingleRecipe", sender: self)
+        } else {
+            deleteButton.isEnabled = true
+        }
         
-        performSegue(withIdentifier: "ShowSingleRecipe", sender: self)
+
+        
+      
     
-        
+    }
+    
+    
+    override func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        if let selectedItems = collectionView.indexPathsForSelectedItems, selectedItems.count == 0 {
+            deleteButton.isEnabled = false
+        }
     }
 
      
@@ -132,7 +150,34 @@ class RecipeCollectionViewController: UICollectionViewController {
     
     
     
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+
+        collectionView.allowsMultipleSelection = editing
+        let indexPaths = collectionView.indexPathsForVisibleItems
+        for indexPath in indexPaths {
+            let cell = collectionView.cellForItem(at: indexPath) as! RecipeCollectionViewCell
+            cell.isInEditingMode = editing
+        }
+    }
     
+    
+    @IBAction func deleteItem(_ sender: Any) {
+        if let selectedCells = collectionView.indexPathsForSelectedItems {
+            
+            let sortedItems = selectedCells.sorted()
+    
+            for item in sortedItems.reversed() {
+                print(item.row)
+            context.delete(recipes[item.row])
+            recipes.remove(at: item.row)
+
+          }
+          collectionView.deleteItems(at: selectedCells)
+          self.saveRecipes()
+          deleteButton.isEnabled = false
+        }
+    }
     
 }
 
