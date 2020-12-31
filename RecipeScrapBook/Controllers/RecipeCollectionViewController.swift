@@ -11,7 +11,7 @@ import CoreData
 
 private let recipeCell = "Recipe Cell"
 
-class RecipeCollectionViewController: UICollectionViewController {
+class RecipeCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var deleteButton: UIBarButtonItem!
     
@@ -20,13 +20,23 @@ class RecipeCollectionViewController: UICollectionViewController {
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-  
+    private let spacing:CGFloat = 16.0
     
     //MARK: VIEW DID LOAD
     override func viewDidLoad() {
         super.viewDidLoad()
         loadRecipes()
         navigationItem.leftBarButtonItem = editButtonItem
+        
+        let layout = UICollectionViewFlowLayout()
+        layout.sectionInset = UIEdgeInsets(top: spacing, left: spacing, bottom: spacing, right: spacing)
+        layout.minimumLineSpacing = spacing
+        layout.minimumInteritemSpacing = spacing
+        self.collectionView?.collectionViewLayout = layout
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        loadRecipes()
     }
     
     
@@ -69,11 +79,18 @@ class RecipeCollectionViewController: UICollectionViewController {
             collectionView.dequeueReusableCell(withReuseIdentifier:
                 recipeCell, for: indexPath) as! RecipeCollectionViewCell
         
-//        cell.recipeLabel.text = recipes[indexPath.item].name
+        cell.titleLabel.text = recipes[indexPath.item].name
+        cell.titleLabel.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        cell.titleLabel.adjustsFontSizeToFitWidth = true
+        cell.titleLabel.minimumScaleFactor = 0.5
+        cell.titleLabel.lineBreakMode = .byWordWrapping
+        cell.titleLabel.numberOfLines = 0
         cell.layer.borderColor = UIColor.black.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 8
         cell.isInEditingMode = isEditing
+        
+        cell.checkmarkLabel.layer.cornerRadius = 18
 
         
         if (recipes[indexPath.item].image != nil) {
@@ -94,11 +111,6 @@ class RecipeCollectionViewController: UICollectionViewController {
         } else {
             deleteButton.isEnabled = true
         }
-        
-
-        
-      
-    
     }
     
     
@@ -107,7 +119,20 @@ class RecipeCollectionViewController: UICollectionViewController {
             deleteButton.isEnabled = false
         }
     }
-
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+            let numberOfItemsPerRow:CGFloat = 2
+            let spacingBetweenCells:CGFloat = 16
+            
+            let totalSpacing = (2 * self.spacing) + ((numberOfItemsPerRow - 1) * spacingBetweenCells) //Amount of total spacing in a row
+            
+            if let collection = self.collectionView{
+                let width = (collection.bounds.width - totalSpacing)/numberOfItemsPerRow
+                return CGSize(width: width, height: width)
+            }else{
+                return CGSize(width: 0, height: 0)
+            }
+        }
      
      
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

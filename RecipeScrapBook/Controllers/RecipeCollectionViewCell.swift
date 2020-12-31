@@ -12,9 +12,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
     
     
     @IBOutlet weak var titleLabel: UILabel!
-    
     @IBOutlet weak var checkmarkLabel: UILabel!
-    
     
     // 1
     var isInEditingMode: Bool = false {
@@ -28,6 +26,7 @@ class RecipeCollectionViewCell: UICollectionViewCell {
         didSet {
             if isInEditingMode {
                 checkmarkLabel.text = isSelected ? "✓" : ""
+                checkmarkLabel.backgroundColor = isSelected ? UIColor.black : UIColor.clear
             }
         }
     }
