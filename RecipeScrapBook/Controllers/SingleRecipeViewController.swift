@@ -15,6 +15,10 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
     @IBOutlet weak var recipeIngredients: UITableView!
     @IBOutlet weak var recipeInstructions: UITableView!
     
+    @IBOutlet weak var addIngredientButton: UIButton!
+    
+    @IBOutlet weak var addStepButton: UIButton!
+    
     @IBAction func newImage() {
         
     }

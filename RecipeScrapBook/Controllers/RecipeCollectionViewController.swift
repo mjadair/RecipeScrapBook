@@ -48,6 +48,7 @@ class RecipeCollectionViewController: UICollectionViewController, UICollectionVi
             
             let newRecipe = Recipe(context: self.context)
             newRecipe.name = textField.text!
+            newRecipe.image = nil
             self.recipes.append(newRecipe)
             self.saveRecipes()
         }
@@ -95,6 +96,9 @@ class RecipeCollectionViewController: UICollectionViewController, UICollectionVi
         
         if (recipes[indexPath.item].image != nil) {
             cell.backgroundView = UIImageView(image: UIImage(data: recipes[indexPath.item].image!))
+        }
+        else {
+            cell.backgroundView = nil
         }
         
         return cell
@@ -170,7 +174,6 @@ class RecipeCollectionViewController: UICollectionViewController, UICollectionVi
         }
         
         collectionView.reloadData()
-        
     }
     
     
