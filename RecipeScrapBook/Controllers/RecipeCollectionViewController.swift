@@ -196,11 +196,10 @@ class RecipeCollectionViewController: UICollectionViewController, UICollectionVi
             let sortedItems = selectedCells.sorted()
     
             for item in sortedItems.reversed() {
-                print(item.row)
             context.delete(recipes[item.row])
             recipes.remove(at: item.row)
-
           }
+            
           collectionView.deleteItems(at: selectedCells)
           self.saveRecipes()
           deleteButton.isEnabled = false

@@ -8,6 +8,7 @@
 
 import UIKit
 import CoreData
+import SwipeCellKit
 
 class SingleRecipeViewController: UIViewController, UINavigationControllerDelegate, UITableViewDataSource, UITableViewDelegate {
     
@@ -44,15 +45,13 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
         // add it to the image view;
         recipeImage.addGestureRecognizer(tapGesture)
         
-        recipeInstructions.addGestureRecognizer(tapGesture)
-        
         let tapGesture2 = UITapGestureRecognizer(target: self, action: #selector(SingleRecipeViewController.ingredientsTapped(gesture:)))
         
-        recipeIngredients.addGestureRecognizer(tapGesture2)
+        addIngredientButton.addGestureRecognizer(tapGesture2)
         
-        let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(SingleRecipeViewController.ingredientsTapped(gesture:)))
+        let tapGesture3 = UITapGestureRecognizer(target: self, action: #selector(SingleRecipeViewController.instructionsTapped(gesture:)))
         
-        recipeIngredients.addGestureRecognizer(tapGesture3)
+        addStepButton.addGestureRecognizer(tapGesture3)
         
         if (recipe!.image != nil) {
             recipeImage.image = fixOrientation(img: UIImage(data: recipe!.image!)!)
@@ -84,16 +83,21 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if tableView == recipeIngredients {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath) as! SwipeTableViewCell
             let ingredient = ingredients[indexPath.row]
             cell.textLabel?.text = ingredient.ingredient
+            cell.textLabel?.textColor = UIColor.white
             cell.accessoryType = ingredient.checked ? .checkmark : .none
+            cell.delegate = self
             return cell
         }
         
         else if tableView == recipeInstructions {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "instructionCell", for: indexPath)
+            let cell = tableView.dequeueReusableCell(withIdentifier: "instructionCell", for: indexPath) as! SwipeTableViewCell
             cell.textLabel?.text = instructions[indexPath.row].instruction
+            cell.delegate = self
+            cell.textLabel?.numberOfLines = 0;
+//            cell.textLabel.NSLineBreakByWordWrapping = 0
             return cell
         }
         
@@ -112,7 +116,14 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
     }
     
 
+    // MARK: SWIPE TO DELETE
     
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! SwipeTableViewCell
+//        cell.delegate = self
+//        return cell
+//    }
+
       
 
 
@@ -130,6 +141,14 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
     
     @objc func ingredientsTapped(gesture: UIGestureRecognizer) {
         var textField = UITextField()
+//        CGRect frameRect = textField.frame;
+//        frameRect.size.height = 100; // <-- Specify the height you want here.
+//        textField.frame = frameRect;
+        
+        
+//        let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+//         textField.addConstraint(heightConstraint)
+        
         let alert = UIAlertController(title: "Add new ingredient", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add item", style: .default) { (action) in
             let newIngredient = Recipe_Ingredients(context: self.context)
@@ -142,6 +161,27 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
         }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new item"
+            textField = alertTextField
+        }
+        alert.addAction(action)
+        present(alert, animated: true, completion: nil)
+        
+        saveRecipe()
+      }
+    
+    @objc func instructionsTapped(gesture: UIGestureRecognizer) {
+        var textField = UITextField()
+        let alert = UIAlertController(title: "Add new step", message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Add instruction", style: .default) { (action) in
+            let newInstruction = Recipe_Instructions(context: self.context)
+            newInstruction.instruction = textField.text!
+            newInstruction.checked = false
+            newInstruction.parentRecipe = self.recipe
+            self.instructions.append(newInstruction)
+            self.saveRecipe()
+        }
+        alert.addTextField { (alertTextField) in
+            alertTextField.placeholder = "Create new instruction"
             textField = alertTextField
         }
         alert.addAction(action)
@@ -248,6 +288,47 @@ extension UIImage {
     }
 }
     
+
+//MARK: Extends the Single Recipe View Controller to have the Swipe Table View Cell Delegate MEthods
+extension SingleRecipeViewController: SwipeTableViewCellDelegate {
     
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath, for orientation: SwipeActionsOrientation) -> [SwipeAction]? {
+        guard orientation == .right else { return nil }
+
+        let deleteAction = SwipeAction(style: .destructive, title: "Delete") { [self] action, indexPath in
+            // handle action by updating model with deletion
+            
+            if tableView == self.recipeIngredients {
+                context.delete(ingredients[indexPath.row])
+                ingredients.remove(at: indexPath.row)
+            }
+            
+            else if tableView == self.recipeInstructions {
+                context.delete(instructions[indexPath.row])
+                instructions.remove(at: indexPath.row)
+            }
+            
+            saveRecipe()
+            
+        }
+
+        // customize the action appearance
+        
+
+        deleteAction.image = UIGraphicsImageRenderer(size: CGSize(width: 15, height: 15)).image { _ in
+            UIImage(named: "delete_icon")?.draw(in: CGRect(x: 0, y: 0, width: 15, height: 15))
+        }
+        
+        
+        
+//        deleteAction.image = UIImage(named: "delete_icon")
+
+        return [deleteAction]
+    }
+    
+    
+    
+}
     
 
