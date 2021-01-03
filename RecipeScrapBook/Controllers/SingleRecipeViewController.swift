@@ -31,6 +31,7 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
     var recipe: Recipe? {
         didSet {
            loadIngredients()
+            loadInstructions()
         }
     }
      
@@ -141,23 +142,13 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
     
     
     @objc func imageTapped(gesture: UIGestureRecognizer) {
-          // if the tapped view is a UIImageView then set it to imageview
           if (gesture.view as? UIImageView) != nil {
-//              print("Image Tapped")
-              //Here you can initiate your new ViewController
           }
       }
     
     
     @objc func ingredientsTapped(gesture: UIGestureRecognizer) {
         var textField = UITextField()
-//        CGRect frameRect = textField.frame;
-//        frameRect.size.height = 100; // <-- Specify the height you want here.
-//        textField.frame = frameRect;
-        
-        
-//        let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
-//         textField.addConstraint(heightConstraint)
         
         let alert = UIAlertController(title: "Add new ingredient", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "Add item", style: .default) { (action) in
@@ -167,7 +158,6 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
             newIngredient.parentRecipe = self.recipe
             self.ingredients.append(newIngredient)
             self.saveRecipe()
-            print(self.ingredients)
         }
         alert.addTextField { (alertTextField) in
             alertTextField.placeholder = "Create new item"
@@ -222,23 +212,15 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
     extension SingleRecipeViewController: UIImagePickerControllerDelegate {
         
         @IBAction func choosePhoto() {
-            // if the user photo library is available
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-                // use the controller
                 let picker = UIImagePickerController()
-                // assign values to keys
                 picker.delegate = self
                 picker.sourceType = .photoLibrary
-                
-                // assign the controller to present the image selected, with the additional keys added above
                 navigationController?.present(picker, animated: true, completion: nil)
             }
             
         }
         
-        
-        
-        // This function displays the image selected from the photo library in our main view.
         func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             navigationController?.dismiss(animated: true, completion: nil)
             if let image = info[UIImagePickerController.InfoKey.originalImage]
@@ -267,9 +249,25 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
             } catch {
                 print("Error fetching from db \(error)")
             }
+        }
+        
+        
+        func loadInstructions(with request: NSFetchRequest<Recipe_Instructions> = Recipe_Instructions.fetchRequest(), predicate: NSPredicate? = nil) {
+            
+            let recipePredicate = NSPredicate(format: "parentRecipe.name MATCHES %@", recipe!.name!)
             
             
-//            recipeIngredients.reloadData()
+            if let additionalPredicate = predicate {
+                request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [recipePredicate, additionalPredicate])
+            } else {
+                request.predicate = recipePredicate
+            }
+            
+            do {
+                instructions = try context.fetch(request)
+            } catch {
+                print("Error fetching from db \(error)")
+            }
         }
         
         
@@ -307,8 +305,7 @@ extension SingleRecipeViewController: SwipeTableViewCellDelegate {
         guard orientation == .right else { return nil }
 
         let deleteAction = SwipeAction(style: .destructive, title: "Delete") { [self] action, indexPath in
-            // handle action by updating model with deletion
-            
+
             if tableView == self.recipeIngredients {
                 context.delete(ingredients[indexPath.row])
                 ingredients.remove(at: indexPath.row)
@@ -322,17 +319,11 @@ extension SingleRecipeViewController: SwipeTableViewCellDelegate {
             saveRecipe()
             
         }
-
-        // customize the action appearance
         
 
         deleteAction.image = UIGraphicsImageRenderer(size: CGSize(width: 15, height: 15)).image { _ in
             UIImage(named: "delete_icon")?.draw(in: CGRect(x: 0, y: 0, width: 15, height: 15))
         }
-        
-        
-        
-//        deleteAction.image = UIImage(named: "delete_icon")
 
         return [deleteAction]
     }
