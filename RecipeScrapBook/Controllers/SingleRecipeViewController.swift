@@ -85,8 +85,13 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
         if tableView == recipeIngredients {
             let cell = tableView.dequeueReusableCell(withIdentifier: "ingredientCell", for: indexPath) as! SwipeTableViewCell
             let ingredient = ingredients[indexPath.row]
-            cell.textLabel?.text = ingredient.ingredient
+            cell.textLabel?.text = "- " + ingredient.ingredient!
+            cell.textLabel?.textAlignment = .right
             cell.textLabel?.textColor = UIColor.white
+            cell.textLabel?.numberOfLines = 0;
+            if ((indexPath.item % 2 ) != 0) {
+                cell.backgroundColor = UIColor.black
+            }
             cell.accessoryType = ingredient.checked ? .checkmark : .none
             cell.delegate = self
             return cell
@@ -94,10 +99,15 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
         
         else if tableView == recipeInstructions {
             let cell = tableView.dequeueReusableCell(withIdentifier: "instructionCell", for: indexPath) as! SwipeTableViewCell
-            cell.textLabel?.text = instructions[indexPath.row].instruction
+            let instruction = instructions[indexPath.row]
+            cell.textLabel?.text = "- " + instruction.instruction!
+            cell.textLabel?.textAlignment = .right
+            cell.textLabel?.textColor = UIColor.white
             cell.delegate = self
             cell.textLabel?.numberOfLines = 0;
-//            cell.textLabel.NSLineBreakByWordWrapping = 0
+            if ((indexPath.item % 2 ) != 0) {
+                cell.backgroundColor = UIColor.black
+            }
             return cell
         }
         

@@ -81,12 +81,11 @@ class RecipeCollectionViewController: UICollectionViewController, UICollectionVi
                 recipeCell, for: indexPath) as! RecipeCollectionViewCell
         
         cell.titleLabel.text = recipes[indexPath.item].name
-        cell.titleLabel.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        cell.titleLabel.backgroundColor = UIColor.white.withAlphaComponent(0.8)
         cell.titleLabel.adjustsFontSizeToFitWidth = true
         cell.titleLabel.minimumScaleFactor = 0.5
-        cell.titleLabel.lineBreakMode = .byWordWrapping
         cell.titleLabel.numberOfLines = 0
-        cell.layer.borderColor = UIColor.black.cgColor
+        cell.layer.borderColor = UIColor.white.cgColor
         cell.layer.borderWidth = 1
         cell.layer.cornerRadius = 8
         cell.isInEditingMode = isEditing
