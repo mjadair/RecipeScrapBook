@@ -16,7 +16,6 @@
 		E7A4BBCE24C85D80005347BC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7A4BBCC24C85D80005347BC /* Main.storyboard */; };
 		E7A4BBD024C85D86005347BC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7A4BBCF24C85D86005347BC /* Assets.xcassets */; };
 		E7A4BBD324C85D86005347BC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7A4BBD124C85D86005347BC /* LaunchScreen.storyboard */; };
-		E7A4BBDF24C8619D005347BC /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4BBDE24C8619D005347BC /* Recipe.swift */; };
 		E7A4BBEA24C89F38005347BC /* RecipeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E7A4BBE924C89F38005347BC /* RecipeCollectionViewCell.swift */; };
 		F2AB69132C4CDB8FAC9B8F84 /* Pods_RecipeScrapBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 17B98143A75662A16F996F25 /* Pods_RecipeScrapBook.framework */; };
 /* End PBXBuildFile section */
@@ -36,7 +35,6 @@
 		E7A4BBCF24C85D86005347BC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E7A4BBD224C85D86005347BC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E7A4BBD424C85D86005347BC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E7A4BBDE24C8619D005347BC /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		E7A4BBE024C8621A005347BC /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		E7A4BBE924C89F38005347BC /* RecipeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -134,7 +132,6 @@
 		E7A4BBDD24C86188005347BC /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				E7A4BBDE24C8619D005347BC /* Recipe.swift */,
 				E709B3DF24EEBCBA00CE29DE /* DataModel.xcdatamodeld */,
 			);
 			path = Models;
@@ -261,7 +258,6 @@
 				E7A4BBC724C85D80005347BC /* AppDelegate.swift in Sources */,
 				E7A4BBC924C85D80005347BC /* SceneDelegate.swift in Sources */,
 				E709B3E724F0109400CE29DE /* SingleRecipeViewController.swift in Sources */,
-				E7A4BBDF24C8619D005347BC /* Recipe.swift in Sources */,
 				E709B3E924F024DE00CE29DE /* ImageExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -408,6 +404,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A5A7TBG6PH;
 				INFOPLIST_FILE = RecipeScrapBook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -426,6 +423,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = A5A7TBG6PH;
 				INFOPLIST_FILE = RecipeScrapBook/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
