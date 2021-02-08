@@ -1,11 +1,14 @@
 #  Recipe ScrapBook 
 <img src= images/logo.png height=100 width=100 />
+<img src= images/recipes.png height=200 width=100 />
 
 ## Overview 
 
 This is my final project as part of Harvard University's online CS50x, Introduction to Computer Science module. 
 
 I decided to build an iOS app using Swift as I was unfamiliar with the technology and wanted to apply all the knowledge I had learned throughout the course to build something entirely new. 
+
+The app, 'Recipe Scrapbook' is a place for user to document all of their own personal recipes. They can view all their recipes in the app, tap on them for more information including ingredients and method as well as add/remove recipes and update their ingredients and methods as required. 
 
 
 ## Technologies Used 💻
@@ -112,14 +115,26 @@ I was fortunately able to use the following logic to reverse the image if requir
 
 ## Challenges 
 
+- Understanding Core Data well enough to be able to write the functions that would be able to use it successfully
+- Swiping on a cell to delete it. I ultimately used the [SwipeCellKit](https://github.com/SwipeCellKit/SwipeCellKit) library to introduce this functionality. 
 
 
 
 ## Successes 
 
-
+- Successfully building my first ever (very basic) iOS with persisting data!
+- Being able to run the app successfully on an iPhone
 
 ## Future features 
+
+I'd like to keep working this app as I become more familiar with Xcode and Swift. Other features/updates I'd like to make.
+
+- Better styling
+- Improved UX design, especially for recipe and methodinput
+- The ability to categorise and search recipes. 
+- Push notifications. Potentially linked to a cooking timer. 
+
+<img src= images/singlerecipe.png height=400 width=200 />
 
  
 
