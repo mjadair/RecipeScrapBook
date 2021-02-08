@@ -1,4 +1,5 @@
-#  Recipe ScrapBook
+#  Recipe ScrapBook 
+<img src= images/logo.png height=100 width=100 />
 
 ## Overview 
 
@@ -15,277 +16,114 @@ I decided to build an iOS app using Swift as I was unfamiliar with the technolog
 
 ## The Approach 
 
-### The Phaser Boilerplate
+### Models
 
-The project started using a typical Phaser boilerplate. Creating a `GameScene` class that extends the `Phaser.Scene` object. 
+The app uses the iOS devices inbuilt Core Data. I started by creating a model for data and the relationships required. 
 
-The class typically utilises three functions: `preload()` for preparing images and sounds ready for the game to use. `create()` for adding game logic and `update()` which listens for changes to the game's state and executes functions accordingly:
+<img src= images/datamodel.png height=200 width=400 />
 
-```js
+Each recipe has a one to many relationship with ingredients and instructions. 
 
-class GameScene extends Phaser.Scene {
-  constructor() {
-    super({ key: 'GameScene' })
-  }
-  
-  preload() {
-  ...
-  }
-  
-  
-  create() {
-  ... 
-  }
-  
-  
- update() {
-   ...
-   }
-   
+### Views
+
+One of the most powerful features of building an iOS app with Xcode is the `Main.storyboard` file, where I was able to plot the layout and general appearance of the app using Xcode's GUI. Coming from a web development background where layouts are designed programatically, this was a new and interesting way of designing a layout.
+
+<img src= images/storyboard.png height=200 width=400 />
+
+The left-most iPhone screen in the example above shows that I have utilised a Navigation controller. This allows me to move between alternative views. 
+
+The second screen shows a Collection View, which was used to show the collection of recipes all on one screen. When a user taps the individual recipe cell it will trigger a segue (initialised in the controller) that will take the user to the final view, the single recipe view.
+
+The Single Recipe View has a number of inbuilt views. An Image and two table views. The latter two to display the ingredients and method associated with the recipe, respectively. 
+
+
+### Controllers
+
+The segue for from the collection view to the single recipe view is triggered as such:
+
+```swift
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        selectedRecipe = recipes[indexPath.row]
+        
+        if !isEditing {
+            deleteButton.isEnabled = false
+            performSegue(withIdentifier: "ShowSingleRecipe", sender: self)
+        } else {
+            deleteButton.isEnabled = true
+        }
+    }
 ```
 
-### The Config
+The above function ensures the app is not in edit mode (for deleting or amending recipes) and then performs the segue to the single recipe view by running this function:
 
-Phaser requires a configuration object with certain stipulated keys in order for the game to render.
+```swift
 
-Here I have added physics to the game, a brilliantly useful tool that Phaser provides out of the box. I've also set the width and height of the canvas to match the `window.innerWidth` and `window.innerHeight` of the device being used so that the game experience is similar on mobile and desktop. 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     
+         if segue.identifier == "ShowSingleRecipe" {
+             if let destVC = segue.destination as? SingleRecipeViewController {
+                 destVC.recipe = selectedRecipe
+             }
+         }
+        
+    }
+```
 
-The scene key has an array containing the three game states. The beginning of the game, prior to the user clicking, the game itself and the game over screen.
+The controllers also deal with using the device's Core Data to fetch and update the recipe information - this was some of the most complex code to figure out for this project and it took a long time for me to understand how to accurately get the data to persist.
 
-```js
-const config = {
-  type: Phaser.AUTO,
-  width: window.innerWidth,
-  height: window.innerHeight,
-  backgroundColor: "b9eaff",
-  physics: {
-    default: 'arcade'
-  },
-  scene: [StartScene, GameScene, EndScene]
+An interesting challenge that arose was, when saving the recipe image. The function below utilises the native `imagePickerController` function to select a photo from the user's picture library and save it to the database in binary:
+
+```swift
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            navigationController?.dismiss(animated: true, completion: nil)
+            if let image = info[UIImagePickerController.InfoKey.originalImage]
+                as? UIImage {
+                recipeImage.image = image
+                recipe!.image = image.toData
+                saveRecipe()
+            }
+        }
+  ```
+  
+  The interesting challenge that arose from this was that when the image was reloaded, it would often be flipped upside down!
+  
+I was fortunately able to use the following logic to reverse the image if required:
+
+```swift
+    func fixOrientation(img: UIImage) -> UIImage {
+        if (img.imageOrientation == .up) {
+            return img
+        }
+            
+        UIGraphicsBeginImageContextWithOptions(img.size, false, img.scale)
+        let rect = CGRect(x: 0, y: 0, width: img.size.width, height: img.size.height)
+        img.draw(in: rect)
+            
+        let normalizedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        UIGraphicsEndImageContext()
+            
+       return normalizedImage
+    }
 }
-
-const game = new Phaser.Game(config)
-
-``` 
-
-
-### Game Logic
-
-The game logic was fairly straightforward to implement once I had gotten to grips with the variety of basic tools that Phaser provides. 
-
-Below is an example of how straightforward it was to write the logic that moves the player's monkey character. This works for both mouse movement on desktop and swiping interaction on mobile.
-
-```js
-   this.input.on('pointermove', function (pointer) {
-
-      this.monkey.x = Phaser.Math.Clamp(pointer.x, 52, window.innerWidth)
-
-      if (this.ball.getData('onMonkey')) {
-        this.ball.x = this.monkey.x
-      }
-
-    }, this)
-    
-```
-
-<img  src=assets/Screenshots/StartDesktop1.png width=500> <img  src=assets/Screenshots/StartMobile.png height=250> 
-
-
-Below is an example of another Phaser-specific feature, collision detection. Which I used to detect collision between the ball and the bananas, removing the banana that was struck and replacing it with a banana peel that is assigned `setGravity` so that it drops directly downwards.
-
-```js
-  this.physics.add.collider(this.ball, this.bananas, (ball, banana) => {
-      this.sound.play('ballbouncing')
-      banana.destroy()
-      this.physics.add.sprite(banana.x, banana.y, 'bananapeel').setScale(.05).setGravity(0, 400)
-      this.scoreText.setText(`Bananas Left: ${this.bananas.getChildren().length}`)
-
-    })
 ```
 
 
-Gravity, velocity and physics are all provided by Phaser, so I won't pore over the specific logic for the whoke game here. The challenge was mostly understanding the framework, rather than writing hugely complicated logic. Do take a look at the source code if you're interested. 
 
-
-<img  src=assets/Screenshots/GamplayDesktop3.png width=500> <img  src=assets/Screenshots/GamplayMobile2.png height=250> 
-
-
-## Challenges <img src= assets/tennisball.png height=20 width=20 />
-- This was all about learning a simpler way of building a game using the JavaScript language that is more powerful than using plain vanilla JavaScript as per my first project. With this, the biggest challenge was to implement the framework as per Phaser's documentation. 
+## Challenges 
 
 
 
-## Successes <img src= assets/fruit_banana.png height=20 width=20 />
 
-- I'm really pleased with how I was able to make the gaming experience similar on mobile and desktop.
-
-- Understanding the framework and implementing physics was really exciting. 
+## Successes 
 
 
 
-## Future features <img src= assets/banana_peel.png height=20 width=20 />
+## Future features 
 
-I'm going to keep working on this game and adding features when I become more familiar with Phaser. Features I aim to add will include:
-
-- A life system, based on the player's monkey avatar dodging the dropping banana peels. The player will lose a life if they are hit by a falling banana peel.
-
-- A points system based on falling peeled bananas. Some of the falling banana peel will be replaced by a banana which the player can catch for bonus points. 
-
-- A progression system, adding extra scenes that increase the diffifulty if a player completes a level. 
+ 
 
 
-## Credits
-
-Sound effects obtained from [Zapsplat](https://www.zapsplat.com)
-
-
-<img  src=assets/Screenshots/GameOverDesktop.png> 
-
-
-
-### [Play the game now!](https://mjadair.github.io/Monkey-Tennis/)
-
-
-
-//
-//  Recipe.swift
-//  RecipeScrapBook
-//
-//  Created by Michael Adair on 22/07/2020.
-//  Copyright © 2020 Michael Adair. All rights reserved.
-//
-
-//import Foundation
-//import SQLite3
-//
-//struct Recipe {
-//    var id: Int32
-//    var content: String
-//}
-//
-//
-//
-//class RecipeManager {
-//    
-//    var database: OpaquePointer?
-//    static let shared = RecipeManager()
-//    private init() {
-//        
-//    }
-//    
-//    
-//    
-//    
-//    // RECIPEMANAGER CONNECT METHOD =========================================================
-//    func connect() {
-//        if database != nil {
-//            return
-//        }
-//        
-//        let databaseURL = try! FileManager.default.url(
-//            for: .documentDirectory,
-//            in: .userDomainMask,
-//            appropriateFor: nil,
-//            create: false
-//        ).appendingPathComponent("recipes.sqlite")
-//        
-//        if sqlite3_open(databaseURL.path, &database) != SQLITE_OK {
-//            print("Error opening database")
-//            return
-//        }
-//        
-//        if sqlite3_exec(
-//            database,
-//            """
-//            CREATE TABLE IF NOT EXISTS recipes (
-//                content TEXT
-//            )
-//            """,
-//            nil,
-//            nil,
-//            nil
-//        ) != SQLITE_OK {
-//            print("Error creating table: \(String(cString: sqlite3_errmsg(database)!))")
-//        }
-//    }
-//    
-//    
-//    
-//    // Add new recipe method ============================================================
-//    
-//    func create() -> Int {
-//        connect()
-//        
-//        var statement: OpaquePointer? = nil
-//        if sqlite3_prepare_v2(
-//            database,
-//            "INSERT INTO recipes (content) VALUES ('This is a recipe!')",
-//            -1,
-//            &statement,
-//            nil
-//        ) == SQLITE_OK {
-//            if sqlite3_step(statement) != SQLITE_DONE {
-//                print("Error inserting note")
-//            }
-//        }
-//        else {
-//            print("Error creating note insert statement")
-//        }
-//        
-//        sqlite3_finalize(statement)
-//        return Int(sqlite3_last_insert_rowid(database))
-//    }
-//    
-//    
-//    
-//    // Get/refresh all Recipes ==========================================================
-//    
-//    func getRecipes() -> [Recipe] {
-//        connect()
-//        
-//        var result: [Recipe] = []
-//        var statement: OpaquePointer? = nil
-//        if sqlite3_prepare_v2(database, "SELECT rowid, content FROM recipes", -1, &statement, nil) == SQLITE_OK {
-//            while sqlite3_step(statement) == SQLITE_ROW {
-//                result.append(Recipe(
-//                    id: sqlite3_column_int(statement, 0),
-//                    content: String(cString: sqlite3_column_text(statement, 1))
-//                ))
-//            }
-//        }
-//        
-//        sqlite3_finalize(statement)
-//        return result
-//    }
-//    
-//    
-//    
-//    
-//    func deleteRecipe(id: Int32) -> Bool {
-//        connect()
-//        
-//        var statement: OpaquePointer!
-//        if sqlite3_prepare_v2(database, "DELETE FROM recipes WHERE rowid = ?", -1, &statement, nil) != SQLITE_OK {
-//            print("error while preparing sql statement")
-//            return false
-//        }
-//        
-//        sqlite3_bind_int(statement, 1, id)
-//        
-//        if sqlite3_step(statement) != SQLITE_DONE {
-//            print("error while trying to delete the recipe")
-//            return false
-//        }
-//        
-//        sqlite3_finalize(statement)
-//        return true
-//    }
-//    
-//    
-//    
-//    
-//    
-//}
 
 
 

@@ -65,8 +65,6 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
         recipeInstructions.delegate = self
         recipeInstructions.dataSource = self
 
-        // Do any additional setup after loading the view.
-//        self.loadIngredients()
     }
     
     
@@ -125,21 +123,6 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
             
         }
     }
-    
-
-    // MARK: SWIPE TO DELETE
-    
-//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell") as! SwipeTableViewCell
-//        cell.delegate = self
-//        return cell
-//    }
-
-      
-
-
-   
-    
     
     @objc func imageTapped(gesture: UIGestureRecognizer) {
           if (gesture.view as? UIImageView) != nil {
@@ -236,7 +219,6 @@ class SingleRecipeViewController: UIViewController, UINavigationControllerDelega
         func loadIngredients(with request: NSFetchRequest<Recipe_Ingredients> = Recipe_Ingredients.fetchRequest(), predicate: NSPredicate? = nil) {
             
             let recipePredicate = NSPredicate(format: "parentRecipe.name MATCHES %@", recipe!.name!)
-            
             
             if let additionalPredicate = predicate {
                 request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [recipePredicate, additionalPredicate])
