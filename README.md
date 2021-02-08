@@ -4,7 +4,7 @@
 
 ## Overview 
 
-This is my final project as part of Harvard University's online CS50x, Introduction to Computer Science module. 
+This is my final project as part of Harvard University's online CS50x, Introduction to Computer Science module. You can view a demo of the app [here](https://www.youtube.com/watch?v=TL5W78YzLtE&feature=youtu.be)
 
 I decided to build an iOS app using Swift as I was unfamiliar with the technology and wanted to apply all the knowledge I had learned throughout the course to build something entirely new. 
 
@@ -135,6 +135,10 @@ I'd like to keep working this app as I become more familiar with Xcode and Swift
 - Push notifications. Potentially linked to a cooking timer. 
 
 <img src= images/singlerecipe.png height=400 width=200 />
+
+## Demo
+
+You can see a demo of the project [here](https://www.youtube.com/watch?v=TL5W78YzLtE&feature=youtu.be)
 
  
 
